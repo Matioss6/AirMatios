@@ -1,4 +1,4 @@
-package com.AirMatios;
+package com.AirMatios.Repository;
 
 import org.springframework.data.annotation.Id;
 

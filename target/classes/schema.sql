@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS UserData (
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL
     );
-
+    
 CREATE TABLE IF NOT EXISTS Flight (
      id INT NOT NULL PRIMARY KEY,
      login VARCHAR(50) NOT NULL,
