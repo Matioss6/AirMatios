@@ -6,6 +6,8 @@ public class UserData {
 
     @Id
     private final String login;
+
+    private String password;
     private String firstName;
     private String lastName;
 
@@ -15,6 +17,14 @@ public class UserData {
 
     public String getLogin() {
         return login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
