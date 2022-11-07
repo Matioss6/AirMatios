@@ -3,25 +3,24 @@ package com.AirMatios.Service;
 import com.AirMatios.Repository.UserData;
 import com.AirMatios.Repository.UserDataRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Optional;
 
 @Service
 public class LoginService {
 
     private UserDataRepository userDataRepository;
+    private String loggedUser;
 
     public LoginService(UserDataRepository userDataRepository) {
         this.userDataRepository = userDataRepository;
     }
 
-
-    public UserData addUser(UserData userData) {
-        return userDataRepository.addUser(userData);
+    public String getLoggedUser() {
+        return loggedUser;
     }
+
+    public void addUser(UserData userData) {
+        userDataRepository.addUser(userData.getLogin(),userData.getPassword(),userData.getFirstName(),userData.getLastName());
+        }
 
     public String logIn(String login, String password)
     {
@@ -29,8 +28,9 @@ public class LoginService {
         if(userDataRepository.existsById(login)){
          userdata = userDataRepository.findById(login).orElseThrow(RuntimeException::new);
          boolean logedIn = userdata.getPassword().equals(password);
-            if(logedIn)
-              return "You are now logged in";
+            if(logedIn){
+                loggedUser=login;
+              return "You are now logged in";}
             else
                 return "Wrong Password";
         }

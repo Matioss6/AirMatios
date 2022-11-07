@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface UserDataRepository extends CrudRepository<UserData, String> {
 
 
-    @Query("INSERT INTO UserData VALUES (:userData.getLogin(), :userData.getPassword(),:userData.getFirstName(),:userData.getLastName()")
+    @Query("INSERT INTO User_Data(login,password,first_Name,last_Name) VALUES (:login, :password,:firstName,:lastName)")
     @Modifying
-    public UserData addUser (UserData userData);
+    public void addUser (String login, String password, String firstName, String lastName);
+
 }

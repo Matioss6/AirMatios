@@ -4,12 +4,12 @@ import org.springframework.data.annotation.Id;
 
 import java.math.BigDecimal;
 
-public class Flight {
+public class    Flight {
 
     @Id
     private int id;
     private String destinationCity;
-    private String arrivalCity;
+    private String departureCity;
     private String departureTime;
     private String arrivalTime;
     private BigDecimal price;
@@ -30,12 +30,12 @@ public class Flight {
         this.destinationCity = destinationCity;
     }
 
-    public String getArrivalCity() {
-        return arrivalCity;
+    public String getDepartureCity() {
+        return departureCity;
     }
 
-    public void setArrivalCity(String arrivalCity) {
-        this.arrivalCity = arrivalCity;
+    public void setDepartureCity(String departureCity) {
+        this.departureCity = departureCity;
     }
 
     public String getDepartureTime() {

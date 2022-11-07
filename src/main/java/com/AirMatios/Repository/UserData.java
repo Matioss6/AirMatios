@@ -5,14 +5,14 @@ import org.springframework.data.annotation.Id;
 public class UserData {
 
     @Id
-    private final String login;
+    private String login;
 
     private String password;
     private String firstName;
     private String lastName;
 
-    UserData(String login){
-        this.login=login;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getLogin() {

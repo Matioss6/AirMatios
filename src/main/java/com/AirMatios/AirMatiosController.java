@@ -1,5 +1,7 @@
 package com.AirMatios;
 
+import com.AirMatios.Repository.Flight;
+import com.AirMatios.Repository.Orders;
 import com.AirMatios.Repository.UserData;
 import com.AirMatios.Service.BookingService;
 import com.AirMatios.Service.LoginService;
@@ -38,9 +40,9 @@ public class AirMatiosController {
 
     @PostMapping("/register")
     public String register(@RequestBody UserData userData){
-        return "ok";
+        loginService.addUser(userData);
+        return "User Added";
     }
-
 
     @GetMapping("/Users")
     public Iterable<UserData> showAllUsers(){
@@ -51,6 +53,40 @@ public class AirMatiosController {
     public Optional<UserData> findDataAboutUser(@RequestParam String login){
         return searchService.findDataAboutUser(login);
     }
+
+    @PostMapping("search")
+    public Iterable<Flight> showFlightByDeparture(@RequestParam String departureCity){
+        return searchService.showFlightByDeparture(departureCity);
+    }
+
+    @PostMapping("searche")
+    public Iterable<Flight> showFlightByPrice(@RequestParam Double price){
+        return searchService.showFlightByPrice(price);
+    }
+    @PostMapping("searcha")
+    public Iterable<Flight> showFlightByPriceAndDirection(@RequestParam Double price, String departureCity, String destinationCity){
+        return searchService.showFlightByPriceAndDirection(price, departureCity, destinationCity);
+    }
+
+    @PostMapping("booking")
+    public Iterable<Orders> bookFlight(@RequestParam int flight_ID){
+        if(!(loginService.getLoggedUser() == null))
+        return bookingService.orderFlight(flight_ID, loginService.getLoggedUser());
+        else
+            System.out.println("proszę się zalogować");
+            return null;
+    }
+
+    @GetMapping("showorders")
+    public Iterable<Orders> findOrdersByUser(){
+        if(!(loginService.getLoggedUser() == null))
+            return bookingService.findOrdersByUser(loginService.getLoggedUser());
+        else
+            System.out.println("proszę się zalogować");
+        return null;
+    }
+
+
 
 
 }
