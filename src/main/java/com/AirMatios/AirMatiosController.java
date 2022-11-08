@@ -5,6 +5,7 @@ import com.AirMatios.Repository.Orders;
 import com.AirMatios.Repository.UserData;
 import com.AirMatios.Service.BookingService;
 import com.AirMatios.Service.LoginService;
+import com.AirMatios.Service.PaymentProxy;
 import com.AirMatios.Service.SearchService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,13 @@ public class AirMatiosController {
     private final BookingService bookingService;
     private final LoginService loginService;
     private final SearchService searchService;
+    private final PaymentProxy paymentProxy;
 
-    public AirMatiosController(BookingService bookingService, LoginService loginService, SearchService searchService) {
+    public AirMatiosController(BookingService bookingService, LoginService loginService, SearchService searchService, PaymentProxy paymentProxy) {
         this.bookingService = bookingService;
         this.loginService = loginService;
         this.searchService = searchService;
+        this.paymentProxy = paymentProxy;
     }
 
     @GetMapping("/")
@@ -75,6 +78,18 @@ public class AirMatiosController {
         else
             System.out.println("proszę się zalogować");
             return null;
+    }
+
+    @GetMapping("payment")
+    public void payment(){
+        if(!(loginService.getLoggedUser() == null)){
+            if(!(bookingService.findOrdersByUser(loginService.getLoggedUser())==null))
+                paymentProxy.payment(bookingService.findOrdersByUser(loginService.getLoggedUser()));
+            else{
+                System.out.println("brak lotów do opłaty");}
+        }
+        else
+            System.out.println("proszę się zalogować");
     }
 
     @GetMapping("showorders")
