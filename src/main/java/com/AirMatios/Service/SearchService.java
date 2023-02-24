@@ -29,6 +29,7 @@ public class SearchService {
         return userDataRepository.findById(login);
     }
 
+    /* Not needed anymore here also
     public Iterable<Flight> showAllFlights(){
         return flightRepository.findAll();
     }
@@ -41,8 +42,16 @@ public class SearchService {
         return flightRepository.showFlightByPrice(price);
     }
 
-    public Iterable<Flight> showFlightByPriceAndDirection(Double price, String departureCity, String destinationCity){
-        return flightRepository.showFlightByPriceAndDirection(price, departureCity, destinationCity);
+    public Iterable<Flight> showFlightByPriceAndDirection(Optional<Double> price, Optional<String> departureCity, Optional<String> destinationCity){
+
+        return flightRepository.showFlightByPriceAndDirection(price.get(), departureCity.get(), destinationCity.get());
+    }
+
+         */
+
+    public Iterable<Flight> showFlight(Double price, String departureCity, String destinationCity){
+
+        return flightRepository.showFlight(price, departureCity, destinationCity);
     }
 
 }

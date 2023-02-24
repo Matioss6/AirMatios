@@ -57,18 +57,24 @@ public class AirMatiosController {
         return searchService.findDataAboutUser(login);
     }
 
-    @PostMapping("search")
-    public Iterable<Flight> showFlightByDeparture(@RequestParam String departureCity){
+    /*  OLD - WRONG - NOT NEEDED ANYMORE - HERE JUST AS REMINDER OF MY OLD MISERABLE LIFE
+    @PostMapping("search1")
+    public Iterable<Flight> showFlightByDeparture(@RequestParam(required = false) String departureCity) {
         return searchService.showFlightByDeparture(departureCity);
     }
 
-    @PostMapping("searche")
+    @PostMapping("search2")
     public Iterable<Flight> showFlightByPrice(@RequestParam Double price){
         return searchService.showFlightByPrice(price);
     }
-    @PostMapping("searcha")
-    public Iterable<Flight> showFlightByPriceAndDirection(@RequestParam Double price, String departureCity, String destinationCity){
+    @PostMapping("search3")
+    public Iterable<Flight> showFlightByPriceAndDirection(@RequestParam Optional<Double> price,@RequestParam Optional<String> departureCity,@RequestParam Optional<String> destinationCity){
         return searchService.showFlightByPriceAndDirection(price, departureCity, destinationCity);
+    }
+    */
+    @PostMapping("search")
+    public Iterable<Flight> showFlight(@RequestParam(required = false) Double price,@RequestParam(required = false) String departureCity,@RequestParam(required = false) String destinationCity){
+        return searchService.showFlight(price, departureCity, destinationCity);
     }
 
     @PostMapping("booking")
