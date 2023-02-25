@@ -1,4 +1,4 @@
-package com.AirMatios;
+package com.AirMatios.Controllers;
 
 import com.AirMatios.Repository.Flight;
 import com.AirMatios.Repository.Orders;
