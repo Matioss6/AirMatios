@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface PaymentProxy {
 
     @GetMapping("payment")
-    String payment(Iterable<Orders> orders);
+    String payment(Iterable<Orders> orders) ;
 
 }

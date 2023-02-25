@@ -1,81 +1,25 @@
 package com.AirMatios;
 
-import com.AirMatios.Repository.Flight;
 import com.AirMatios.Repository.Orders;
-import com.AirMatios.Repository.UserData;
 import com.AirMatios.Service.BookingService;
 import com.AirMatios.Service.LoginService;
 import com.AirMatios.Service.PaymentProxy;
-import com.AirMatios.Service.SearchService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @RestController
 public class AirMatiosController {
 
     private final BookingService bookingService;
     private final LoginService loginService;
-    private final SearchService searchService;
     private final PaymentProxy paymentProxy;
 
-    public AirMatiosController(BookingService bookingService, LoginService loginService, SearchService searchService, PaymentProxy paymentProxy) {
+    public AirMatiosController(BookingService bookingService,LoginService loginService, PaymentProxy paymentProxy) {
         this.bookingService = bookingService;
         this.loginService = loginService;
-        this.searchService = searchService;
         this.paymentProxy = paymentProxy;
     }
 
-    @GetMapping("/")
-    public String homeGet(){
-        return "Welcome to our awesome service where You can search / book flights !!";
-    }
-
-    @GetMapping("/login")
-    public String loginGet(){
-        return "Please use Post Mapping with Your credentials";
-    }
-
-    @PostMapping("/login")
-    public String loginPost(@RequestParam String login, String password){
-        return loginService.logIn(login, password);
-    }
-
-    @PostMapping("/register")
-    public String register(@RequestBody UserData userData){
-        loginService.addUser(userData);
-        return "User Added";
-    }
-
-    @GetMapping("/Users")
-    public Iterable<UserData> showAllUsers(){
-        return searchService.showAllUsers();
-    }
-
-    @PostMapping("/User")
-    public Optional<UserData> findDataAboutUser(@RequestParam String login){
-        return searchService.findDataAboutUser(login);
-    }
-
-    /*  OLD - WRONG - NOT NEEDED ANYMORE - HERE JUST AS REMINDER OF MY OLD MISERABLE LIFE
-    @PostMapping("search1")
-    public Iterable<Flight> showFlightByDeparture(@RequestParam(required = false) String departureCity) {
-        return searchService.showFlightByDeparture(departureCity);
-    }
-
-    @PostMapping("search2")
-    public Iterable<Flight> showFlightByPrice(@RequestParam Double price){
-        return searchService.showFlightByPrice(price);
-    }
-    @PostMapping("search3")
-    public Iterable<Flight> showFlightByPriceAndDirection(@RequestParam Optional<Double> price,@RequestParam Optional<String> departureCity,@RequestParam Optional<String> destinationCity){
-        return searchService.showFlightByPriceAndDirection(price, departureCity, destinationCity);
-    }
-    */
-    @PostMapping("search")
-    public Iterable<Flight> showFlight(@RequestParam(required = false) Double price,@RequestParam(required = false) String departureCity,@RequestParam(required = false) String destinationCity){
-        return searchService.showFlight(price, departureCity, destinationCity);
-    }
 
     @PostMapping("booking")
     public Iterable<Orders> bookFlight(@RequestParam int flight_ID){
@@ -98,14 +42,6 @@ public class AirMatiosController {
             System.out.println("proszę się zalogować");
     }
 
-    @GetMapping("showorders")
-    public Iterable<Orders> findOrdersByUser(){
-        if(!(loginService.getLoggedUser() == null))
-            return bookingService.findOrdersByUser(loginService.getLoggedUser());
-        else
-            System.out.println("proszę się zalogować");
-        return null;
-    }
 
 
 

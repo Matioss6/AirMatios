@@ -24,5 +24,6 @@ public interface FlightRepository extends PagingAndSortingRepository<Flight, Int
     */
 
     @Query("SELECT * FROM Flight WHERE (:price IS NULL OR price <= :price) AND (:departureCity IS NULL OR LOWER(departure_City) LIKE LOWER(:departureCity)) AND (:destinationCity IS NULL OR LOWER(destination_City) LIKE LOWER(:destinationCity))")
-    public Iterable<Flight>  showFlight(Double price, String departureCity, String destinationCity);
+    Iterable<Flight>  showFlight(Double price, String departureCity, String destinationCity);
+
 }
