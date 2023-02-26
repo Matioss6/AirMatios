@@ -61,4 +61,16 @@ public class    Flight {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id=" + id +
+                ", destinationCity='" + destinationCity + '\'' +
+                ", departureCity='" + departureCity + '\'' +
+                ", departureTime='" + departureTime + '\'' +
+                ", arrivalTime='" + arrivalTime + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface PaymentProxy {
 
     @GetMapping("payment")
-    String payment(Iterable<Orders> orders) throws NotEnoughMoneyException;
+    String payment(Iterable<Orders> orders);
 
 }

@@ -34,4 +34,13 @@ public class Orders {
     public void setFlight_ID(int flight_ID) {
         this.FlightID = flight_ID;
     }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "OrderID=" + OrderID +
+                ", UserLogin='" + UserLogin + '\'' +
+                ", FlightID=" + FlightID +
+                '}';
+    }
 }

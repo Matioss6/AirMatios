@@ -27,7 +27,7 @@ public class AirMatiosControllerSearching {
 
 
 
-    @PostMapping("search")
+    @GetMapping("search")
     public Iterable<Flight> showFlight(@RequestParam(required = false) Double price,@RequestParam(required = false) String departureCity,@RequestParam(required = false) String destinationCity){
         return searchService.showFlight(price, departureCity, destinationCity);
     }
