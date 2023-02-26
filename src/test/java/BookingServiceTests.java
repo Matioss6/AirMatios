@@ -35,7 +35,7 @@ public class BookingServiceTests {
 
         when(ordersRepository.findOrderByUser(user_login)).thenReturn(list);
 
-        System.out.println(ordersRepository.findOrderByUser(user_login));
+        System.out.println(bookingService.findOrdersByUser(user_login));
 
 
     }

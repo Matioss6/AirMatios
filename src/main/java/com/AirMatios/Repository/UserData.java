@@ -11,6 +11,13 @@ public class UserData {
     private String firstName;
     private String lastName;
 
+    public UserData(String login, String password, String firstName, String lastName) {
+        this.login = login;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public void setLogin(String login) {
         this.login = login;
     }
