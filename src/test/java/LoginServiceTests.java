@@ -1,6 +1,7 @@
 import com.AirMatios.Repository.UserData;
 import com.AirMatios.Repository.UserDataRepository;
 import com.AirMatios.Service.LoginService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -8,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
 
 @ExtendWith(MockitoExtension.class)
 public class LoginServiceTests {
@@ -28,8 +30,9 @@ LoginService loginService;
         when(userDataRepository.existsById(user.getLogin())).thenReturn(true);
         when(userDataRepository.findById(user.getLogin())).thenReturn(Optional.of(user));
 
-        System.out.println(loginService.logIn(user.getLogin(),user.getPassword()));
-
+        String result = loginService.logIn(user.getLogin(),user.getPassword());
+        System.out.println(result);
+        Assertions.assertEquals(result, "You are now logged in");
     }
 
     @Test
@@ -41,8 +44,9 @@ LoginService loginService;
 
         when(userDataRepository.existsById(user.getLogin())).thenReturn(false);
 
-        System.out.println(loginService.logIn(user.getLogin(),user.getPassword()));
-
+        String result = loginService.logIn(user.getLogin(),user.getPassword());
+        System.out.println(result);
+        Assertions.assertEquals(result, "No such user exists");
     }
 
     @Test
@@ -55,8 +59,9 @@ LoginService loginService;
         when(userDataRepository.existsById(user.getLogin())).thenReturn(true);
         when(userDataRepository.findById(user.getLogin())).thenReturn(Optional.of(user));
 
-        System.out.println(loginService.logIn(user.getLogin(),"inne haslo"));
-
+        String result = loginService.logIn(user.getLogin(),"inne haslo");
+        System.out.println(result);
+        Assertions.assertEquals(result, "Wrong Password");
     }
 
 }
