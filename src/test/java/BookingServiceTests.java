@@ -5,22 +5,22 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class BookingServiceTests {
 
 
     @Test
     @DisplayName("Test for Booking service")
-    public void bookingHappyFlow(){
+    public void bookingHappyFlow() {
 
         OrdersRepository ordersRepository = mock(OrdersRepository.class);
         BookingService bookingService = new BookingService(ordersRepository);
 
-        int flight_ID =1;
+        int flight_ID = 1;
         String user_login = "Matios";
 
         Orders order = new Orders();
@@ -30,7 +30,6 @@ public class BookingServiceTests {
 
         List<Orders> list = new ArrayList<>();
         list.add(order);
-
 
 
         when(ordersRepository.findOrderByUser(user_login)).thenReturn(list);

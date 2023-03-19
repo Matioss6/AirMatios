@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 @ExtendWith(MockitoExtension.class)
 public class LoginServiceTests {
